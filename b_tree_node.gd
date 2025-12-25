@@ -9,8 +9,6 @@ class_name BTreeNode
 extends Node
 
 
-const SUCCESS = "__SUCCESS__"
-const FAILURE = "__FAILURE__"
 #Parent 'behavior tree' node, not a godot Node!
 @export
 var parentTreeNode : BTreeNode 

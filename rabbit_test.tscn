@@ -1,13 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://rhghfb0n1nfo"]
+[gd_scene load_steps=19 format=3 uid="uid://rhghfb0n1nfo"]
 
 [ext_resource type="Script" uid="uid://cad07t2kf0g7p" path="res://rabbit.gd" id="1_x4njy"]
 [ext_resource type="Resource" uid="uid://q4mkgiqgpmr1" path="res://rabbit_stats.tres" id="2_7h6o0"]
 [ext_resource type="Texture2D" uid="uid://uo4c41sirml6" path="res://rabbit.svg" id="3_isneq"]
 [ext_resource type="Script" uid="uid://c173po8aoqij5" path="res://behavior_tree.gd" id="4_yjca1"]
-[ext_resource type="Script" uid="uid://civ7bxwr6gskx" path="res://hop_node.gd" id="5_l8kg5"]
 [ext_resource type="Script" uid="uid://dweghplx86e3o" path="res://death_node.gd" id="6_i4fo5"]
 [ext_resource type="Script" uid="uid://ds1g2cvab2675" path="res://desire_selector.gd" id="7_ey7ik"]
-[ext_resource type="Script" uid="uid://c4tw7q4kyx0yc" path="res://eat_berries_node.gd" id="8_7l1sy"]
+[ext_resource type="PackedScene" uid="uid://durquaqr3ylr3" path="res://wander_sequence.tscn" id="7_irev5"]
 [ext_resource type="Script" uid="uid://bh3jbjirc3qge" path="res://sense_berries.gd" id="9_47lto"]
 [ext_resource type="Texture2D" uid="uid://cf2dpufw6nw54" path="res://rabbit_dead.png" id="10_jw7dj"]
 [ext_resource type="Texture2D" uid="uid://n2xrasflpwmd" path="res://rabbit.png" id="11_gcieg"]
@@ -65,34 +64,21 @@ texture = ExtResource("3_isneq")
 
 [node name="BehaviorTree" type="Node" parent="." node_paths=PackedStringArray("starting_tree_node", "death_node")]
 script = ExtResource("4_yjca1")
-starting_tree_node = NodePath("HopNode")
+starting_tree_node = NodePath("DesireSelector")
 death_node = NodePath("DeathNode")
 metadata/_custom_type_script = "uid://c173po8aoqij5"
 
-[node name="HopNode" type="Node" parent="BehaviorTree" node_paths=PackedStringArray("hop_node", "desire_selector_node", "parentTreeNode")]
-script = ExtResource("5_l8kg5")
-hop_node = NodePath(".")
-desire_selector_node = NodePath("../DesireSelector")
-parentTreeNode = NodePath(".")
-metadata/_custom_type_script = "uid://bovqwy2ievjux"
-
-[node name="DeathNode" type="Node" parent="BehaviorTree" node_paths=PackedStringArray("parentTreeNode")]
+[node name="DeathNode" type="Node" parent="BehaviorTree"]
 script = ExtResource("6_i4fo5")
-parentTreeNode = NodePath("../HopNode")
 metadata/_custom_type_script = "uid://dweghplx86e3o"
 
-[node name="DesireSelector" type="Node" parent="BehaviorTree" node_paths=PackedStringArray("eat_node", "wander_node", "parentTreeNode")]
+[node name="DesireSelector" type="Node" parent="BehaviorTree" node_paths=PackedStringArray("wander_node")]
 script = ExtResource("7_ey7ik")
-eat_node = NodePath("EatBerriesNode")
-wander_node = NodePath("../HopNode")
-parentTreeNode = NodePath("../HopNode")
+wander_node = NodePath("WanderSequence")
 metadata/_custom_type_script = "uid://ds1g2cvab2675"
 
-[node name="EatBerriesNode" type="Node" parent="BehaviorTree/DesireSelector" node_paths=PackedStringArray("hop_node", "parentTreeNode")]
-script = ExtResource("8_7l1sy")
-hop_node = NodePath("../../HopNode")
+[node name="WanderSequence" parent="BehaviorTree/DesireSelector" node_paths=PackedStringArray("parentTreeNode") instance=ExtResource("7_irev5")]
 parentTreeNode = NodePath("..")
-metadata/_custom_type_script = "uid://c4tw7q4kyx0yc"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true

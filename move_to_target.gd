@@ -17,7 +17,7 @@ func _enter() -> void:
 
 func _exit() -> void:
 	parentAnimal.nav_agent.velocity_computed.disconnect(_on_navigation_agent_2d_velocity_computed)
-	parentAnimal.target = null
+	parentAnimal.velocity = Vector2.ZERO
 
 func __physics_process(delta: float) -> BTreeNode:
 
@@ -43,7 +43,7 @@ func __physics_process(delta: float) -> BTreeNode:
 	return null
 
 
-#Built in 
+#This is a required function for NavigationAgent2D to apply movement physics to our body
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	parentAnimal.velocity = safe_velocity
 	parentAnimal.move_and_slide()

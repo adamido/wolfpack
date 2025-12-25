@@ -48,9 +48,6 @@ func _ready() -> void:
 	mood_manager._init_mood_manager(self)
 
 func _process(delta: float) -> void:
-	b_tree.__process(delta)
-	
-func _physics_process(delta: float) -> void:
 	
 	#BAREBONE STARVATION MECHANICS. TODO: We should consider fat, and other factors.
 	if self.energy > 0:
@@ -66,7 +63,10 @@ func _physics_process(delta: float) -> void:
 	if is_dead and self.biomass <= 0:
 		#Remove rabbit from world
 		queue_free()
+
+	b_tree.__process(delta)
 	
+func _physics_process(delta: float) -> void:
 	b_tree.__physics_process(delta)
 
 func _unhandled_input(event: InputEvent) -> void:

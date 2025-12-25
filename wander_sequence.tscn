@@ -1,6 +1,36 @@
-[gd_scene load_steps=2 format=3 uid="uid://durquaqr3ylr3"]
+[gd_scene load_steps=6 format=3 uid="uid://durquaqr3ylr3"]
 
 [ext_resource type="Script" uid="uid://b7dhlokpq5ks6" path="res://wander_sequence.gd" id="1_w4uyt"]
+[ext_resource type="Script" uid="uid://viaaqndwi1fw" path="res://move_to_target.gd" id="2_qs2rv"]
+[ext_resource type="Script" uid="uid://bb00i2knl4tj7" path="res://idle.gd" id="3_qs2rv"]
+[ext_resource type="Script" uid="uid://jm8en5ue5gru" path="res://success_node.gd" id="4_a1eee"]
+[ext_resource type="Script" uid="uid://xs5yoiq4y6i3" path="res://failure_node.gd" id="5_2t70m"]
 
-[node name="WanderSequence" type="Node"]
+[node name="WanderSequence" type="Node" node_paths=PackedStringArray("move_to_target_node", "idle_node", "rand_point", "parentTreeNode")]
 script = ExtResource("1_w4uyt")
+move_to_target_node = NodePath("MoveToTarget")
+idle_node = NodePath("Idle")
+rand_point = NodePath("rand_point")
+parentTreeNode = NodePath(".")
+
+[node name="MoveToTarget" type="Node" parent="." node_paths=PackedStringArray("fail_node", "success_node", "parentTreeNode")]
+script = ExtResource("2_qs2rv")
+fail_node = NodePath("../FailureNode")
+success_node = NodePath("../SuccessNode")
+parentTreeNode = NodePath("..")
+metadata/_custom_type_script = "uid://viaaqndwi1fw"
+
+[node name="Idle" type="Node" parent="." node_paths=PackedStringArray("parentTreeNode")]
+script = ExtResource("3_qs2rv")
+parentTreeNode = NodePath("..")
+metadata/_custom_type_script = "uid://bovqwy2ievjux"
+
+[node name="SuccessNode" type="Node" parent="."]
+script = ExtResource("4_a1eee")
+metadata/_custom_type_script = "uid://jm8en5ue5gru"
+
+[node name="FailureNode" type="Node" parent="."]
+script = ExtResource("5_2t70m")
+metadata/_custom_type_script = "uid://xs5yoiq4y6i3"
+
+[node name="rand_point" type="Marker2D" parent="."]

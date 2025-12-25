@@ -1,3 +1,6 @@
+## This class defines the Wander Sequence Node which randomly
+## directs an animal. 
+ 
 class_name WanderSequence
 extends BTreeNode
 
@@ -8,6 +11,7 @@ var i := 0
 var max_hops := 3
 var curr_hops := 0
 
+#Marker to navigate to
 @export var rand_point : Marker2D
 
 func _enter() -> void:
@@ -26,9 +30,10 @@ func __process(delta: float) -> BTreeNode:
 
     if res == null:
         # Still running
-        return curr
+        return null
 
     if res is FailureNode:
+        #Return to 'desire_selector.gd'
         return parentTreeNode
 
     if res is SuccessNode:
@@ -41,10 +46,10 @@ func __process(delta: float) -> BTreeNode:
                 rand_point.global_position = parentAnimal.global_position + _get_rand_point(300)
                 parentAnimal.target = rand_point
             else:
-                # Finished wandering
+                # Finished wandering, return to 'desire_selector.gd'
                 return parentTreeNode
 
-    return curr
+    return null
 
 func _get_rand_point(r: float) -> Vector2:
     return Vector2(randf_range(-r, r), randf_range(-r, r))
