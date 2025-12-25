@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdpbdli15pjt5"]
+
+[ext_resource type="Script" uid="uid://dweghplx86e3o" path="res://death_node.gd" id="1_7bd5n"]
+
+[node name="DeathNode" type="Node"]
+script = ExtResource("1_7bd5n")
+metadata/_custom_type_script = "uid://bovqwy2ievjux"

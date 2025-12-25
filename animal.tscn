@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b31oebuhn46xk"]
+
+[ext_resource type="Script" uid="uid://cx8asl24i4ipt" path="res://animal.gd" id="1_stvu6"]
+[ext_resource type="Resource" uid="uid://c7o1kuh5yenl3" path="res://animal_stats.tres" id="2_23vr7"]
+
+[node name="Animal" type="CharacterBody2D"]
+script = ExtResource("1_stvu6")
+stats_template = ExtResource("2_23vr7")

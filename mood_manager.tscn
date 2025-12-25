@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckhgw1d7hyugv"]
+
+[ext_resource type="Script" uid="uid://bfyf1lagu6twg" path="res://mood_manager.gd" id="1_lumuy"]
+
+[node name="MoodManager" type="Node"]
+script = ExtResource("1_lumuy")

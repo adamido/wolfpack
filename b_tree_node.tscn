@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://gcdux6ouuwyx"]
+
+[ext_resource type="Script" uid="uid://bovqwy2ievjux" path="res://b_tree_node.gd" id="1_cihtp"]
+
+[node name="BTreeNode" type="Node"]
+script = ExtResource("1_cihtp")

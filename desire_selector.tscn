@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6h6vt82mx5xu"]
+
+[ext_resource type="Script" uid="uid://ds1g2cvab2675" path="res://desire_selector.gd" id="1_dtg7j"]
+
+[node name="DesireSelector" type="Node"]
+script = ExtResource("1_dtg7j")

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://n3risg5iq1dv"]
+
+[ext_resource type="Script" uid="uid://c4tw7q4kyx0yc" path="res://eat_berries_node.gd" id="1_tbcsp"]
+
+[node name="EatBerriesNode" type="Node"]
+script = ExtResource("1_tbcsp")
+metadata/_custom_type_script = "uid://bovqwy2ievjux"

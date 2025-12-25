@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdw2tjjx8md5n"]
+
+[ext_resource type="Texture2D" uid="uid://cyig57tc4lek0" path="res://wolfart.svg" id="1_u330r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4fn2"]
+radius = 32.01562
+
+[node name="AlphaWolf" type="CharacterBody2D"]
+slide_on_ceiling = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_g4fn2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_u330r")

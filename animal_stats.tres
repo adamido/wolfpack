@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="AnimalStats" load_steps=2 format=3 uid="uid://c7o1kuh5yenl3"]
+
+[ext_resource type="Script" uid="uid://7sdldcgykaqy" path="res://animal_stats.gd" id="1_lk41i"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_lk41i")
+metadata/_custom_type_script = "uid://7sdldcgykaqy"

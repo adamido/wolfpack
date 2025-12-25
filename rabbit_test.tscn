@@ -1,0 +1,129 @@
+[gd_scene load_steps=20 format=3 uid="uid://rhghfb0n1nfo"]
+
+[ext_resource type="Script" uid="uid://cad07t2kf0g7p" path="res://rabbit.gd" id="1_x4njy"]
+[ext_resource type="Resource" uid="uid://q4mkgiqgpmr1" path="res://rabbit_stats.tres" id="2_7h6o0"]
+[ext_resource type="Texture2D" uid="uid://uo4c41sirml6" path="res://rabbit.svg" id="3_isneq"]
+[ext_resource type="Script" uid="uid://c173po8aoqij5" path="res://behavior_tree.gd" id="4_yjca1"]
+[ext_resource type="Script" uid="uid://civ7bxwr6gskx" path="res://hop_node.gd" id="5_l8kg5"]
+[ext_resource type="Script" uid="uid://dweghplx86e3o" path="res://death_node.gd" id="6_i4fo5"]
+[ext_resource type="Script" uid="uid://ds1g2cvab2675" path="res://desire_selector.gd" id="7_ey7ik"]
+[ext_resource type="Script" uid="uid://c4tw7q4kyx0yc" path="res://eat_berries_node.gd" id="8_7l1sy"]
+[ext_resource type="Script" uid="uid://bh3jbjirc3qge" path="res://sense_berries.gd" id="9_47lto"]
+[ext_resource type="Texture2D" uid="uid://cf2dpufw6nw54" path="res://rabbit_dead.png" id="10_jw7dj"]
+[ext_resource type="Texture2D" uid="uid://n2xrasflpwmd" path="res://rabbit.png" id="11_gcieg"]
+[ext_resource type="Script" uid="uid://bfyf1lagu6twg" path="res://mood_manager.gd" id="12_yygn6"]
+[ext_resource type="Script" uid="uid://nidrq5oy5vf2" path="res://eat_area.gd" id="13_wk6i3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_msxim"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v8u83"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7sjl"]
+atlas = ExtResource("10_jw7dj")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vme1"]
+atlas = ExtResource("11_gcieg")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oj77g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7sjl")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vme1")
+}],
+"loop": true,
+"name": &"hop",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4s0dg"]
+
+[node name="RabbitTest" type="CharacterBody2D" node_paths=PackedStringArray("nav_agent", "b_tree", "anim", "mood_manager")]
+script = ExtResource("1_x4njy")
+nav_agent = NodePath("NavigationAgent2D")
+b_tree = NodePath("BehaviorTree")
+anim = NodePath("AnimatedSprite2D")
+stats_template = ExtResource("2_7h6o0")
+mood_manager = NodePath("MoodManager")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_msxim")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("3_isneq")
+
+[node name="BehaviorTree" type="Node" parent="." node_paths=PackedStringArray("starting_tree_node", "death_node")]
+script = ExtResource("4_yjca1")
+starting_tree_node = NodePath("HopNode")
+death_node = NodePath("DeathNode")
+metadata/_custom_type_script = "uid://c173po8aoqij5"
+
+[node name="HopNode" type="Node" parent="BehaviorTree" node_paths=PackedStringArray("hop_node", "desire_selector_node", "parentTreeNode")]
+script = ExtResource("5_l8kg5")
+hop_node = NodePath(".")
+desire_selector_node = NodePath("../DesireSelector")
+parentTreeNode = NodePath(".")
+metadata/_custom_type_script = "uid://bovqwy2ievjux"
+
+[node name="DeathNode" type="Node" parent="BehaviorTree" node_paths=PackedStringArray("parentTreeNode")]
+script = ExtResource("6_i4fo5")
+parentTreeNode = NodePath("../HopNode")
+metadata/_custom_type_script = "uid://dweghplx86e3o"
+
+[node name="DesireSelector" type="Node" parent="BehaviorTree" node_paths=PackedStringArray("eat_node", "wander_node", "parentTreeNode")]
+script = ExtResource("7_ey7ik")
+eat_node = NodePath("EatBerriesNode")
+wander_node = NodePath("../HopNode")
+parentTreeNode = NodePath("../HopNode")
+metadata/_custom_type_script = "uid://ds1g2cvab2675"
+
+[node name="EatBerriesNode" type="Node" parent="BehaviorTree/DesireSelector" node_paths=PackedStringArray("hop_node", "parentTreeNode")]
+script = ExtResource("8_7l1sy")
+hop_node = NodePath("../../HopNode")
+parentTreeNode = NodePath("..")
+metadata/_custom_type_script = "uid://c4tw7q4kyx0yc"
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 32.0
+
+[node name="HopTimer" type="Timer" parent="."]
+
+[node name="SenseBerries" type="Area2D" parent="."]
+collision_mask = 3
+script = ExtResource("9_47lto")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SenseBerries"]
+scale = Vector2(20, 20)
+shape = SubResource("CircleShape2D_v8u83")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_oj77g")
+animation = &"dead"
+
+[node name="MoodManager" type="Node" parent="."]
+script = ExtResource("12_yygn6")
+metadata/_custom_type_script = "uid://bfyf1lagu6twg"
+
+[node name="EatArea" type="Area2D" parent="."]
+script = ExtResource("13_wk6i3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EatArea"]
+scale = Vector2(10, 10)
+shape = SubResource("CircleShape2D_4s0dg")
+
+[connection signal="body_entered" from="SenseBerries" to="SenseBerries" method="_on_body_entered"]
+[connection signal="body_exited" from="SenseBerries" to="SenseBerries" method="_on_body_exited"]
+[connection signal="body_entered" from="EatArea" to="EatArea" method="_on_body_entered"]
+[connection signal="body_exited" from="EatArea" to="EatArea" method="_on_body_exited"]

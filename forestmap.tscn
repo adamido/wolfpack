@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxdv0dhijrloq"]
+
+[ext_resource type="Script" uid="uid://oilsur1l8ap7" path="res://rabbit_family.gd" id="1_pys4d"]
+[ext_resource type="PackedScene" uid="uid://xsju2ef6c1ci" path="res://rabbit.tscn" id="2_bi6et"]
+[ext_resource type="PackedScene" uid="uid://c02t7c20xiqlj" path="res://berries.tscn" id="3_f4tmr"]
+[ext_resource type="Script" uid="uid://1troixwty5tv" path="res://berry_patch.gd" id="4_7k1sp"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_16qxk"]
+vertices = PackedVector2Array(1510.9766, 826.09375, -361.0078, 844.8906, -362.97656, -192.00781, 1509.0078, -193.97656)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-373, -202, -371, 855, 1521, 836, 1519, -204)])
+
+[node name="World" type="Node2D"]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(-579, -323)
+navigation_polygon = SubResource("NavigationPolygon_16qxk")
+
+[node name="RabbitFamily" type="Node2D" parent="."]
+script = ExtResource("1_pys4d")
+rabbit_scene = ExtResource("2_bi6et")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Berries" parent="." instance=ExtResource("3_f4tmr")]
+position = Vector2(-42, 45)
+
+[node name="BerryPatch" type="Node2D" parent="."]
+script = ExtResource("4_7k1sp")
+berries_scene = ExtResource("3_f4tmr")

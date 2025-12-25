@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RabbitStats" load_steps=2 format=3 uid="uid://q4mkgiqgpmr1"]
+
+[ext_resource type="Script" uid="uid://8d6l5wy3ckya" path="res://rabbit_stats.gd" id="1_fp3g3"]
+
+[resource]
+script = ExtResource("1_fp3g3")
+health = 0.25
+energy = 0.25
+attack_damage = 0.15

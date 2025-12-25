@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://drvo256kwro8o"]
+
+[ext_resource type="Script" uid="uid://jm8en5ue5gru" path="res://success_node.gd" id="1_b5rvd"]
+
+[node name="SuccessNode" type="Node"]
+script = ExtResource("1_b5rvd")
+metadata/_custom_type_script = "uid://bovqwy2ievjux"
