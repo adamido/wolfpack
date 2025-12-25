@@ -7,20 +7,30 @@ var desire : MoodManager.Desires
 @export var mate_node : BTreeNode
 @export var sleep_node : BTreeNode
 @export var wander_node : BTreeNode
-@export var desires : Dictionary = {}
+var desires : Dictionary
+
 
 func _enter() -> void:
-    parentAnimal.velocity = Vector2.ZERO
-    desire = parentAnimal.mood_manager._get_curr_desire()
-    desires[MoodManager.Desires.EAT] = eat_node
-    desires[MoodManager.Desires.FLEE] = flee_node
-    desires[MoodManager.Desires.MATE] = mate_node
-    desires[MoodManager.Desires.SLEEP] = sleep_node
-    desires[MoodManager.Desires.WANDER] = wander_node
-    desires[MoodManager.Desires.SLEEP] = sleep_node
-    
+	var desires = { 
+		MoodManager.Desires.EAT : eat_node,
+		MoodManager.Desires.FLEE : flee_node,
+		MoodManager.Desires.MATE : mate_node,
+		MoodManager.Desires.SLEEP : sleep_node,
+		MoodManager.Desires.WANDER : wander_node,
+	}
+	print("ENTER DESIRE SELECTOR")
+	parentAnimal.velocity = Vector2.ZERO
+	desire = parentAnimal.mood_manager._get_curr_desire()
+	
 func _exit() -> void:
-    pass
+	pass
 
 func __process(delta: float) -> BTreeNode:
-    return desires.get(desire)
+	match desire:
+		MoodManager.Desires.EAT: return eat_node
+		MoodManager.Desires.FLEE : return flee_node
+		MoodManager.Desires.MATE : return mate_node
+		MoodManager.Desires.SLEEP : return sleep_node
+		MoodManager.Desires.WANDER : return wander_node
+
+	return null

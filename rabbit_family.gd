@@ -8,7 +8,7 @@ extends Node2D
 var rabbits : Array[Rabbit] = []
 
 func _ready() -> void:
-	for i in range(10):
+	for i in range(1):
 		if spawn_on_ready:
 			rabbits.append(spawn_rabbit())
 		
@@ -22,6 +22,6 @@ func spawn_rabbit() -> Node2D:
 	rabbit.global_position = Vector2(randf_range(-250,250), randf_range(-250,250))
 	
 	get_tree().current_scene.add_child.call_deferred(rabbit)
-	print("Instantiated node type:", rabbit)
-	print("Spawned rabbit at: ", rabbit.global_position)
+	#print("Instantiated node type:", rabbit)
+	#print("Spawned rabbit at: ", rabbit.global_position)
 	return rabbit

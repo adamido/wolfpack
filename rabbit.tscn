@@ -112,8 +112,9 @@ shape = SubResource("CircleShape2D_v8u83")
 sprite_frames = SubResource("SpriteFrames_oj77g")
 animation = &"dead"
 
-[node name="MoodManager" type="Node" parent="."]
+[node name="MoodManager" type="Node" parent="." node_paths=PackedStringArray("parentAnimal")]
 script = ExtResource("10_6f2u8")
+parentAnimal = NodePath("..")
 metadata/_custom_type_script = "uid://bfyf1lagu6twg"
 
 [node name="EatArea" type="Area2D" parent="."]

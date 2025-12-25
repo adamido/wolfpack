@@ -72,9 +72,10 @@ metadata/_custom_type_script = "uid://c173po8aoqij5"
 script = ExtResource("6_i4fo5")
 metadata/_custom_type_script = "uid://dweghplx86e3o"
 
-[node name="DesireSelector" type="Node" parent="BehaviorTree" node_paths=PackedStringArray("wander_node")]
+[node name="DesireSelector" type="Node" parent="BehaviorTree" node_paths=PackedStringArray("wander_node", "parentTreeNode")]
 script = ExtResource("7_ey7ik")
 wander_node = NodePath("WanderSequence")
+parentTreeNode = NodePath(".")
 metadata/_custom_type_script = "uid://ds1g2cvab2675"
 
 [node name="WanderSequence" parent="BehaviorTree/DesireSelector" node_paths=PackedStringArray("parentTreeNode") instance=ExtResource("7_irev5")]
@@ -96,7 +97,7 @@ shape = SubResource("CircleShape2D_v8u83")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_oj77g")
-animation = &"dead"
+animation = &"hop"
 
 [node name="MoodManager" type="Node" parent="."]
 script = ExtResource("12_yygn6")

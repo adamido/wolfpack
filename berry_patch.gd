@@ -5,7 +5,7 @@ class_name BerryPatch extends Node2D
 @export var r_height : float = 500
 
 func _ready() -> void:
-	for i in range(20):
+	for i in range(30):
 		spawn_berries()
 
 func spawn_berries() -> Node2D:

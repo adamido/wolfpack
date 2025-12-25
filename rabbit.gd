@@ -9,7 +9,7 @@ const RABBIT_MAX_ENERGY :float= .25
 const RABBIT_ATTACK_DAMAGE :float= .25
 
 #A rabbit's energy will decrease by this much every second.
-const RABBIT_STARVE_SPEED :float= .05
+const RABBIT_STARVE_SPEED :float= .01
 
 #Navigation agent used for pathfinding
 @export
@@ -42,7 +42,7 @@ func _ready() -> void:
 	hop_timer = get_node("HopTimer")
 	hop_timer.timeout.connect(_on_timer_timeout)
 	print("Rabbit.gd DEBUG: Rabbit ready at: ", global_position)
-	print("Rabbit health: ", self.health)
+	#print("Rabbit health: ", self.health)
 
 	#Init this Rabbit's MoodManager
 	mood_manager._init_mood_manager(self)
@@ -78,7 +78,7 @@ func _on_timer_timeout():
 func register_berry(berry: Berries) -> void:
 	if not nearby_food.has(berry):
 		nearby_food.append(berry)
-		print("Rabbit.gd DEBUG: Berry sensed at: ", berry.global_position)
+		#print("Rabbit.gd DEBUG: Berry sensed at: ", berry.global_position)
 
 func unregister_berry(berry: Berries) -> void:
 	nearby_food.erase(berry)

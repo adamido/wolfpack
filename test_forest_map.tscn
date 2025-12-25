@@ -6,9 +6,9 @@
 [ext_resource type="Script" uid="uid://1troixwty5tv" path="res://berry_patch.gd" id="4_7npol"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_16qxk"]
-vertices = PackedVector2Array(1510.9766, 826.09375, -361.0078, 844.8906, -362.97656, -192.00781, 1509.0078, -193.97656)
+vertices = PackedVector2Array(1642.1172, 903.0469, -426.0078, 913.9375, -427.97656, -233.04688, 1544.8203, -243.9375)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-373, -202, -371, 855, 1521, 836, 1519, -204)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-438, -243, -436, 924, 1653, 913, 1554, -254)])
 
 [node name="TestForestMap" type="Node2D"]
 
