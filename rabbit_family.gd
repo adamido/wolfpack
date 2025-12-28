@@ -8,7 +8,7 @@ extends Node2D
 var rabbits : Array[Rabbit] = []
 
 func _ready() -> void:
-	for i in range(1):
+	for i in range(8):
 		if spawn_on_ready:
 			rabbits.append(spawn_rabbit())
 		

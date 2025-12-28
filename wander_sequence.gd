@@ -4,7 +4,7 @@
 class_name WanderSequence
 extends BTreeNode
 
-@export var WANDER_RADIUS = 75.0
+@export var WANDER_RADIUS = 125.0
 @export var move_to_target_node : BTreeNode
 @export var idle_node : BTreeNode
 var children : Array = []
@@ -17,13 +17,18 @@ var curr : BTreeNode = null
 #Marker to navigate to
 @export var rand_point : Marker2D
 
-func _enter() -> void:
-	rand_point.global_position = parentAnimal.global_position + _get_rand_point(WANDER_RADIUS)
-	children.clear()
+func _ready() -> void:
+	#Populate array of children
 	children.append(move_to_target_node)
-	children.append(idle_node)
+	children.append(idle_node)	
+
+
+func _enter() -> void:
+	#calculate a random point to move towards.
+	rand_point.global_position = parentAnimal.global_position + _get_rand_point(WANDER_RADIUS)
+
+	#assign curr and execute _enter().
 	i = 0
-	#assign curr and execute _enter()
 	curr = children[0]
 	if curr is MoveToTarget:
 		curr.set_target(rand_point)

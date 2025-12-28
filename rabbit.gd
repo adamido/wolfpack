@@ -9,12 +9,8 @@ const RABBIT_MAX_ENERGY :float= .25
 const RABBIT_ATTACK_DAMAGE :float= .25
 
 #A rabbit's energy will decrease by this much every second.
-const RABBIT_STARVE_SPEED :float= .01
+const RABBIT_STARVE_SPEED :float= .05
 
-#Navigation agent used for pathfinding
-@export
-var nav_agent : NavigationAgent2D
-#Target for our behavior tree to navigate to
 
 @export
 var b_tree : BehaviorTree

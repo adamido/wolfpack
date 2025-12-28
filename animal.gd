@@ -4,7 +4,6 @@ extends CharacterBody2D
 signal died
 
 @export var stats_template : AnimalStats
-var is_dead := false
 var stats : AnimalStats
 var health :float
 var energy :float
@@ -14,8 +13,11 @@ var move_speed :float
 var nearby_food :Array[Animal]= []
 var nearby_threats:Array[Animal] = []
 var target : Node2D
+var is_dead := false
 
 @export var mood_manager : MoodManager
+
+@export var nav_agent : NavigationAgent2D
 
 func _ready():
 	stats = stats_template.duplicate(true)
@@ -32,13 +34,13 @@ func _eat(a : Animal) -> void:
 	
 	if a.is_dead:
 		var gain = a._get_eaten(self)
-		var new_energy = self.energy + gain*0.5
-		var new_health = self.health + gain*0.2
+		var new_energy = self.energy + gain*0.2
+		var new_health = self.health + gain*0.5
 
 		#Fat gain is the % of excess health/energy gained.
 		var fat_gain = max(0.0, (new_energy - stats.energy) / stats.energy) + max(0.0, (new_health - stats.health) / stats.health)
 		if fat_gain > 0.0:
-			stats.fat = min(stats.fat + fat_gain, stats.fat_cap)
+			stats.fat = min(self.fat + fat_gain, stats.fat_cap)
 
 		self.energy = min(new_energy, stats.energy)
 		self.health = min(new_health, stats.health)
@@ -67,7 +69,15 @@ func _take_damage(amount:float):
 func _die() -> void:
 	if is_dead:
 		return
-	
+
+	#Disconnect nav_agent signals (If we don't, Animals will moving after death)
+	if nav_agent:
+		for c in nav_agent.velocity_computed.get_connections():
+			nav_agent.velocity_computed.disconnect(c.callable)
+		nav_agent.queue_free()
+		nav_agent = null
+
+	#Calculate the amount of 'biomass' this corpse will have.
 	is_dead = true;
 	self.biomass = stats.health
 	velocity = Vector2.ZERO
