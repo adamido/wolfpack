@@ -4,7 +4,7 @@
 class_name WanderSequence
 extends BTreeNode
 
-@export var WANDER_RADIUS = 125.0
+@export var WANDER_RADIUS = 325
 @export var move_to_target_node : BTreeNode
 @export var idle_node : BTreeNode
 var children : Array = []
@@ -50,7 +50,7 @@ func __process(delta: float) -> BTreeNode:
 		return null
 
 	if res is FailureNode:
-		print("FAILNODE!")
+		#print("FAILNODE!")
 		curr._exit()
 		return parentTreeNode
 

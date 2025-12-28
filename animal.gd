@@ -70,7 +70,7 @@ func _die() -> void:
 	if is_dead:
 		return
 
-	#Disconnect nav_agent signals (If we don't, Animals will moving after death)
+	#Disconnect nav_agent signals (If we don't, Animals will move after death)
 	if nav_agent:
 		for c in nav_agent.velocity_computed.get_connections():
 			nav_agent.velocity_computed.disconnect(c.callable)

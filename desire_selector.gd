@@ -18,7 +18,7 @@ func _enter() -> void:
 		MoodManager.Desires.SLEEP : sleep_node,
 		MoodManager.Desires.WANDER : wander_node,
 	}
-	print("ENTER DESIRE SELECTOR")
+	#print("ENTER DESIRE SELECTOR")
 	parentAnimal.velocity = Vector2.ZERO
 	desire = parentAnimal.mood_manager._get_curr_desire()
 	

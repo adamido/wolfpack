@@ -12,7 +12,7 @@ var last_pos :Vector2
 
 func _enter() -> void:
 	if parentAnimal.nav_agent != null:
-		#Set Nav Agent's target from parent's target
+		#Set Nav Agent's target
 		parentAnimal.nav_agent.velocity_computed.connect(_on_navigation_agent_2d_velocity_computed)
 		parentAnimal.nav_agent.target_position = target.global_position
 		last_pos = parentAnimal.global_position

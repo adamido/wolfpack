@@ -18,7 +18,7 @@ func _ready() -> void:
 	parent = self.get_parent()
 	change_node(starting_tree_node)
 
-#Recursively call _init_tree on all children of the given node. This is necessary for the child nodes to have a pointer to the parent animal.
+#Initialize all nodes of our behavior tree with a reference to the parent Animal.
 func _init_tree(node: Node, animal : Animal) -> void:
 	for c in node.get_children():
 		if c is BTreeNode:

@@ -83,7 +83,7 @@ func unregister_berry(berry: Berries) -> void:
 func _eat(a : Animal) -> void:
 
 	if !a or a.biomass <= 0.0:
-		return
+		return 
 	
 	if a is Berries:
 
@@ -98,10 +98,6 @@ func _eat(a : Animal) -> void:
 
 		self.energy = min(new_energy, stats.energy)
 		self.health = min(new_health, stats.health)
-		
-	else:
-		print("Rabbit failed to EAT!")
-	pass
 
 func _is_valid_food(a : Animal) -> bool:
 	return a is Berries and a.biomass > 0

@@ -10,9 +10,9 @@ enum Desires {
 }
 
 var desire_vals = {
-		Desires.EAT: 0.0,
+		Desires.EAT: 1.0,
 		Desires.SLEEP: 0.0,
-		Desires.WANDER: 1.0,
+		Desires.WANDER: 0.0,
 		Desires.MATE: 0.0,
 		Desires.FLEE: 0.0
 	}
